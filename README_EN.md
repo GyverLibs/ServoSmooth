@@ -1,3 +1,5 @@
+This is an automatic translation, may be incorrect in some places. See sources and examples!
+
 # ServoSmooth
 Library for smooth control of servos
 - Addition to the standard Servo library
