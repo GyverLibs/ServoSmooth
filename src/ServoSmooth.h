@@ -53,12 +53,17 @@
     v3.6 - Исправлены мелкие баги, вырезан дебаг с 3.5
     v3.7 - Добавлено задание ускорения в градусах/сек/сек
     v3.8 - Исправлен невозврат тика при autoDetach(false)
+    v3.9 - поддержка ESP32
 */
 
 #ifndef _ServoSmooth_h
 #define _ServoSmooth_h
 #include <Arduino.h>
+#if defined(ESP32)
+#include <ESP32Servo.h>
+#else
 #include <Servo.h>
+#endif
 #include "smoothUtil.h"
 
 #define _SERVO_DEADZONE 10      // мёртвая зона (по микросекундам)
