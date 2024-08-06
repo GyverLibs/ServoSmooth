@@ -39,6 +39,13 @@
     - Arduino IDE
     - Arduino IDE v2
     - PlatformIO
+      > После подключения библиотеки, в **platformio.ini** необходимо добавить **arduino-libraries/Servo** и **Wire**. Таким образом, список должен будет состоять как минимум из 3х библиотек:
+        ```
+        lib_deps = 
+            gyverlibs/ServoSmooth
+            arduino-libraries/Servo
+            Wire
+        ```
 - [Скачать библиотеку](https://github.com/GyverLibs/ServoSmooth/archive/refs/heads/main.zip) .zip архивом для ручной установки:
     - Распаковать и положить в *C:\Program Files (x86)\Arduino\libraries* (Windows x64)
     - Распаковать и положить в *C:\Program Files\Arduino\libraries* (Windows x32)
