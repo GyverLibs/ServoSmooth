@@ -42,8 +42,8 @@
       > После подключения библиотеки, в **platformio.ini** необходимо добавить **arduino-libraries/Servo** и **Wire**. Таким образом, список должен будет состоять как минимум из 3х библиотек:
         ```
         lib_deps = 
-            gyverlibs/ServoSmooth@3.9
-            arduino-libraries/Servo@1.2.2
+            gyverlibs/ServoSmooth
+            arduino-libraries/Servo
             Wire
         ```
 - [Скачать библиотеку](https://github.com/GyverLibs/ServoSmooth/archive/refs/heads/main.zip) .zip архивом для ручной установки:
