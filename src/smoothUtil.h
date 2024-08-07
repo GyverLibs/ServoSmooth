@@ -5,8 +5,8 @@
 
 #include <Arduino.h>
 
-#define SS_SERVO_PERIOD 20		// период работы tick(), мс
-#define SS_DEADTIME 10			// количество тиков до detach
+#define SS_SERVO_PERIOD 20        // период работы tick(), мс
+#define SS_DEADTIME 10            // количество тиков до detach
 #define NORMAL 0
 #define REVERSE 1
 
@@ -16,9 +16,9 @@ public:
     virtual void sendToDriver(uint16_t val);    // отправить на серво
     void writeMicroseconds(uint16_t angle);     // повернуть на импульс. Аналог метода из библиотеки Servo
     void attach();                              // аттач при известном пине
-    virtual void attach(int pin);               // аналог метода из библиотеки Servo	
+    virtual void attach(int pin);               // аналог метода из библиотеки Servo    
     void attach(int pin, int target);           // аттач + установка позиции (в градусах ИЛИ в микросекундах, программа сама поймёт)
-    void attach(int pin, int min, int max, int target = 0);	// аналог метода из библиотеки Servo. min по умолч. 500, max 2400. target - положение (в углах или мкс, на которые серво повернётся при подключении)
+    void attach(int pin, int min, int max, int target = 0);    // аналог метода из библиотеки Servo. min по умолч. 500, max 2400. target - положение (в углах или мкс, на которые серво повернётся при подключении)
     virtual void detach();                      // аналог метода из библиотеки Servo
     void start();                               // attach + разрешает работу tick
     void stop();                                // detach + запрещает работу tick
@@ -27,7 +27,7 @@ public:
     // Возвращает true, когда целевая позиция достигнута.
     // Имеет встроенный таймер с периодом SS_SERVO_PERIOD
     
-    bool tickManual();						    // метод, управляющий сервой, без встроенного таймера.
+    bool tickManual();                            // метод, управляющий сервой, без встроенного таймера.
     // Возвращает true, когда целевая позиция достигнута
     
     void setSpeed(int speed);                   // установка максимальной скорости (больше 0), градусов / с
@@ -52,12 +52,12 @@ protected:
     float _speed = 0, _lastSpeed = 0;
     byte timeoutCounter = 0;
     int _maxAngle = 180;
-    int _servoCurrentPos = 600;	// если не вызван аттач(пин, таргет)
+    int _servoCurrentPos = 600;    // если не вызван аттач(пин, таргет)
     int _servoTargetPos = 600;
     int _min = 500;
     int _max = 2400;
     float _delta = SS_SERVO_PERIOD / 1000.0;
-    uint32_t _prevServoTime = 0;		
+    uint32_t _prevServoTime = 0;        
     int8_t _pin;
     int16_t _servoMaxSpeed = 1400;
     uint16_t _acceleration = 1000;

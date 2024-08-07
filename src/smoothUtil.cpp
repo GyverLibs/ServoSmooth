@@ -43,7 +43,7 @@ void Smooth::attach() {
 void Smooth::attach(int pin, int target) {
     _pin = pin;
     attach(_pin);
-    if (target <= _maxAngle) write(target);		// если в градусах
+    if (target <= _maxAngle) write(target);        // если в градусах
     else writeMicroseconds(target);
 }
 
@@ -54,7 +54,7 @@ void Smooth::attach(int pin, int min, int max, int target) {
 }
 
 void Smooth::start() {
-    attach(_pin);	
+    attach(_pin);    
     _tickFlag = true;
 }
 
@@ -72,20 +72,20 @@ void Smooth::smoothStart() {
         attach();
         writeUs(_servoCurrentPos);
         delay(25);
-    }	
+    }    
 }
 
 // ====== SET ======
 void Smooth::setSpeed(int speed) {
-    _servoMaxSpeed = (long)speed * _max / _maxAngle;	// ~ перевод из градусов в секунду в тики
+    _servoMaxSpeed = (long)speed * _max / _maxAngle;    // ~ перевод из градусов в секунду в тики
 }
 
 void Smooth::setAccel(double accel) {
-    _acceleration = (float)accel * _max * 3;			// для совместимости со старыми скетчами (уск. 0.1-1)
+    _acceleration = (float)accel * _max * 3;            // для совместимости со старыми скетчами (уск. 0.1-1)
 }
 
 void Smooth::setAccel(int accel) {
-    _acceleration = (long)accel * (_max - _min) / _maxAngle;	// напрямую в градусах/сек/сек (перевод в тики)
+    _acceleration = (long)accel * (_max - _min) / _maxAngle;    // напрямую в градусах/сек/сек (перевод в тики)
 }
 
 void Smooth::setTarget(int target) {
@@ -142,12 +142,12 @@ boolean Smooth::tick() {
     return !_servoState;
 }
 
-boolean Smooth::tickManual() {	
+boolean Smooth::tickManual() {    
     if (_tickFlag) {
         int err = _servoTargetPos - _servoCurrentPos;
-        if (abs(err) > SS_DEADZONE && abs(_lastSpeed - _speed) < SS_DEADZONE_SP) {			// условие остановки
+        if (abs(err) > SS_DEADZONE && abs(_lastSpeed - _speed) < SS_DEADZONE_SP) {            // условие остановки
             if (_acceleration != 0) {
-                bool thisDir = ((float)_speed * _speed / _acceleration / 2.0 >= abs(err));  	// пора тормозить
+                bool thisDir = ((float)_speed * _speed / _acceleration / 2.0 >= abs(err));      // пора тормозить
                 _speed += (float)_acceleration * _delta * (thisDir ? -_sign(_speed) : _sign(err));
             } else {
                 _speed = err/_delta;
@@ -162,12 +162,12 @@ boolean Smooth::tickManual() {
             writeUs(_servoCurrentPos);
         } else {
             //_servoCurrentPos = _servoTargetPos;
-            _speed = 0;			
+            _speed = 0;            
             if (_servoState) {
                 writeUs(_servoCurrentPos);
                 timeoutCounter++;
             }
-            if (timeoutCounter > SS_DEADTIME && _servoState) {			
+            if (timeoutCounter > SS_DEADTIME && _servoState) {            
                 _servoState = false;
                 if (_autoDetach) detach();
             }
@@ -187,7 +187,7 @@ if (err != 0) {
         _servoCurrentPos = _servoTargetPos;
         _speed = 0;
         lastSpeed = 0;
-        if (_autoDetach && _servoState) {			
+        if (_autoDetach && _servoState) {            
             _servoState = false;
             detach();
         }
@@ -216,27 +216,27 @@ if (err != 0) {
 /*
 // алгоритм до версии 3.0
 if (_tickFlag) {
-    int _newSpeed = _servoTargetPos - _servoCurrentPos;						// расчёт скорости
+    int _newSpeed = _servoTargetPos - _servoCurrentPos;                        // расчёт скорости
     if (_servoState) {
-        _newSpeed = constrain(_newSpeed, -_servoMaxSpeed, _servoMaxSpeed);	// ограничиваем по макс.
-        _servoCurrentPos += _newSpeed;										// получаем новую позицию			
-        _newPos += (float)(_servoCurrentPos - _newPos) * _k;				// и фильтруем её
-        _newPos = constrain(_newPos, _min, _max);							// ограничиваем
-        writeUs((int)_newPos);												// отправляем на серво
+        _newSpeed = constrain(_newSpeed, -_servoMaxSpeed, _servoMaxSpeed);    // ограничиваем по макс.
+        _servoCurrentPos += _newSpeed;                                        // получаем новую позицию            
+        _newPos += (float)(_servoCurrentPos - _newPos) * _k;                // и фильтруем её
+        _newPos = constrain(_newPos, _min, _max);                            // ограничиваем
+        writeUs((int)_newPos);                                                // отправляем на серво
     }
 }
 if (abs(_servoTargetPos - (int)_newPos) < SS_DEADZONE) {
-    if (_autoDetach && _servoState) {			
+    if (_autoDetach && _servoState) {            
         _servoCurrentPos = _servoTargetPos;
         _servoState = false;
         _servo.detach();
     }
-    return !_servoState;	// приехали
+    return !_servoState;    // приехали
 } else {
     if (_autoDetach && !_servoState) {
         _servoState = true;
         _servo.attach(_pin);
-    }		
+    }        
 }
 return false;
 */

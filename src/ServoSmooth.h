@@ -1,6 +1,6 @@
-/*	
+/*    
     ServoSmooth - библиотека для плавного управления сервоприводами
-    Документация: https://alexgyver.ru/servosmooth/	
+    Документация: https://alexgyver.ru/servosmooth/    
     GitHub: https://github.com/GyverLibs/ServoSmooth
     Возможности:
     - Дополнение к стандартной библиотеке Servo
@@ -73,10 +73,10 @@ class ServoSmooth : public Smooth {
 public:
     ServoSmooth(int maxAngle = 180);
     using Smooth::attach;
-    void attach(int pin);	
+    void attach(int pin);    
     void detach();
-    void sendToDriver(uint16_t val);	
-    Servo _servo;			
+    void sendToDriver(uint16_t val);    
+    Servo _servo;            
 private:
 };
 #endif

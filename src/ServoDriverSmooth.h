@@ -18,6 +18,6 @@ public:
     Adafruit_PWMServoDriver _servo = Adafruit_PWMServoDriver();
     
 private:
-    static bool _startFlag;		// общий флаг для всех членов
+    static bool _startFlag;        // общий флаг для всех членов
 };
 #endif
